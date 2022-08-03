@@ -41,11 +41,11 @@ function recipePage(recipeData) {
       console.log(title);
       recipeList += "<span class='label label-primary'>" + recipeCount + ".  </span>" + title;
     }
-    //recipe url section      
-    var sourceURL = recipe.sourceUrl;
-    if (sourceURL) {
-      recipeList += "<a href='" + sourceURL + "'>" + sourceURL + "</a>";
-    }
+    // //recipe url section. URL not in fetch with ingredients
+    // var sourceURL = recipe.sourceUrl;
+    // if (sourceURL) {
+    //   recipeList += "<a href='" + sourceURL + "'>" + sourceURL + "</a>";
+    // }
     $("#recipe-section").append(recipeList);
   }
 }
