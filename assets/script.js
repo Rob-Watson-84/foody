@@ -4,30 +4,28 @@ var spoonAPI = '51070bf02459445cb28205ccc4e24c4c'
 
 
 // .on("click") function associated with the Search Button
-$("#search-btn").on("click", function (event) {
+$("#submit-btn").on("click", function (event) {
   event.preventDefault();
-
+  alert("Testing button!");
   var protein = $("#protein").val().trim();
   var carbs = $("#carbs").val().trim();
   var veggies = $("#vegetables").val().trim();
-
   var urlTag = protein + "," + carbs + "," + veggies;
-  var spoonUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" spoonAPI + "&ingredients=" urlTag,
-};
+  var spoonUrl = "https://api.spoonacular.com/recipes/findByIngredients?apiKey=" + spoonAPI + "&ingredients=" + urlTag
+  fetch(spoonUrl)
+    .then((response) => response.json())
+    .then(data => {
+      console.log(data);
+      recipePage(data);
+    })
+    .catch(error => {
+      console.log("Error");
+    });
+});
 
-fetch(spoonUrl)
-  .then((response) => response.json())
-  .then(data => {
-    console.log(data);
-  })
-  .catch(error => {
-    console.log("Error");
-  });
 
-
-
+//create list of recipe names
 function recipePage(recipeData) {
-  var recipeCount = $("#recipe-count").val();
   console.log(recipeData);
   for (let i = 0; i < recipeCount; i++) {
     // Get recipe info for current index
