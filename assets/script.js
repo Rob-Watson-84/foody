@@ -24,12 +24,12 @@ $("#submit-btn").on("click", function (event) {
     .then(data => {
       console.log(data);
       var recipeID = data.results[0].id
-      console.log(`Recipe ID: ${recipeID}`)
 
       var recipeTitle = document.createElement("h2");
       document.getElementById("foodtitle").appendChild(recipeTitle);
       recipeTitle.textContent = data.results[0].title;
 
+      recipe(recipeID)
     })
     .catch(error => {
       console.log(error);
@@ -48,33 +48,28 @@ $("#submit-btn").on("click", function (event) {
     });
 });
 
-
 //create list of recipe names and pictures
 
 function recipe(recipeID) {
-  var idUrl = `https://api.spoonacular.com/recipes/${recipeID}/information?includeNutrition=false?apiKey=` + spoonAPI
-  console.log(idUrl)
+var idUrl = `https://api.spoonacular.com/recipes/${recipeID}/analyzedInstructions?apiKey=${spoonAPI}`
+
+  console.log(`recipeFunction: ${idUrl}`)
   fetch(idUrl)
     .then((response) => response.json())
     .then(data => {
+      console.log(data)
+      var recipeInstructions = document.createElement("ol");
+      document.getElementById("instructions").appendChild(recipeInstructions);
+
+      for (let i = 0; i < data[0].steps.length; i++) {
+        var recipeStep = document.createElement("li");
+        recipeStep.textContent = data[0].steps[i].step;
+        document.querySelector("#instructions ol").appendChild(recipeStep);
+      }
+     
       // recipeSection(data);
     })
     .catch(error => {
       console.log("Error");
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
