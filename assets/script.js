@@ -25,6 +25,11 @@ $("#submit-btn").on("click", function (event) {
       console.log(data);
       var recipeID = data.results[0].id
       console.log(`Recipe ID: ${recipeID}`)
+
+      var recipeTitle = document.createElement("h2");
+      document.getElementById("foodtitle").appendChild(recipeTitle);
+      recipeTitle.textContent = data.results[0].title;
+
     })
     .catch(error => {
       console.log(error);
