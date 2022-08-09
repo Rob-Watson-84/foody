@@ -8,12 +8,12 @@ $("#submit-btn").on("click", function (event) {
   event.preventDefault();
 
   var protein = $("#protein").val().trim(); //main protein, cuisine, diet
-  //foloowing items are not required but do change the search parameters
+  //following items are not required but do change the search parameters
   var carbs = $("#carbs").val().trim();
   var veggies = $("#veggies").val().trim();
-  var other = $("#other").val().trim();
+  // var other = $("#other").val().trim();
 
-  var urlTag = protein + "," + carbs + "," + veggies; + "," + other
+  var urlTag = protein + "+" + carbs + "+" + veggies; 
   var spoonUrl = "https://api.spoonacular.com/recipes/complexSearch?apiKey=" + spoonAPI + "&query=" + urlTag
   console.log(spoonUrl);
     fetch(spoonUrl)
